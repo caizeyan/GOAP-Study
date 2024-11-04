@@ -113,3 +113,4 @@ Obsolete/
 .project
 .classpath
 *.csproj
+obj/Debug
