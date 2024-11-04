@@ -32,11 +32,11 @@ public abstract class IAgent: MonoBehaviour
         //判断目标是否完成
         if (curGoal == null)
         {
-            curGoal = goals[curGoalIndex];
+            curGoal = goals[0];
         }
 
         //没有就进行查找
-        if (actionStack == null || actionStack.Count == 0)
+        if (actionStack == null)
         {
             actionStack = panle.GetPlan(actions, curGoal.sgoals);
         }
@@ -47,6 +47,12 @@ public abstract class IAgent: MonoBehaviour
             if (actionStack.Peek().Run() == ActionStage.Finished)
             {
                 actionStack.Pop();
+                //处理完成
+                if (actionStack.Count == 0)
+                {
+                    goals.RemoveAt(0);
+                    actionStack = null;
+                }
             }
         }
       

@@ -4,12 +4,12 @@ public class Patient: IAgent
 {
     protected override void InitActions()
     {
-        var gotoHospital = new GotoTargetAction("Go To Hp", this, 1, "WaitingArea");
-        gotoHospital.SetEffectCondition(new List<WorldState>(){ new WorldState("Hp",1)});
+        var gotoHospital = new GotoTargetAction("GoToHp", this, 1, "WaitingArea");
+        gotoHospital.AddPreCondition(ConditionHelper.GoToDoor());
+        gotoHospital.AddEffectCondition(ConditionHelper.GoToHospital());
 
-        var gotoDoor = new GotoTargetAction("Go To Door", this, 1, "Door");
-        gotoDoor.SetPreCondition(new List<WorldState>(){ new WorldState("Hp",1)});
-        gotoDoor.SetEffectCondition(new List<WorldState>(){ new WorldState("GoToDoor",1)});
+        var gotoDoor = new GotoTargetAction("GoToDoor", this, 1, "Door");
+        gotoDoor.AddEffectCondition(ConditionHelper.GoToDoor());
         actions.Add(gotoHospital);
         actions.Add(gotoDoor);
     }
@@ -17,7 +17,7 @@ public class Patient: IAgent
     protected override void InitGoals()
     {
         Goal goal = new Goal("Go To Door");
-        goal.AddStation("GoToDoor",1);
+        goal.AddStation(ConditionHelper.GoToHospital());
         goals.Add(goal);
     }
 }

@@ -14,8 +14,8 @@ public enum ActionStage
 public abstract class IAction 
 {
     public float cost = 1f;
-    public List<WorldState> preCondition;
-    public List<WorldState> afterEffect;
+    public List<WorldState> preConditions;
+    public List<WorldState> afterEffects;
     private GWorld world =  GWorld.Instance;
     public string actionName = "";
     public ActionStage stage = ActionStage.Prepare;
@@ -27,18 +27,18 @@ public abstract class IAction
         this.agent = agent;
         this.cost = cost;
         stage = ActionStage.Prepare;
-        preCondition = new List<WorldState>();
-        afterEffect = new List<WorldState>();
+        preConditions = new List<WorldState>();
+        afterEffects = new List<WorldState>();
     }
 
-    public void SetPreCondition(List<WorldState> preCondition)
+    public void AddPreCondition(WorldState preCondition)
     {
-        this.preCondition = preCondition;
+        preConditions.Add(preCondition);
     }
 
-    public void SetEffectCondition(List<WorldState> afterEffect)
+    public void AddEffectCondition(WorldState afterEffect)
     {
-        this.afterEffect = afterEffect;
+        this.afterEffects.Add(afterEffect);
     }
     
     //当前场景是否可以使用该Action
@@ -51,10 +51,10 @@ public abstract class IAction
     //是否满足路径
     public bool IsCanInvoke(Dictionary<string, int> dictionary)
     {
-        if (preCondition != null)
+        if (preConditions != null)
         {
             //判断前提条件
-            foreach (var condition in preCondition)
+            foreach (var condition in preConditions)
             {
                 if (!Helper.IsConditionSatisfied(dictionary,condition))
                 {

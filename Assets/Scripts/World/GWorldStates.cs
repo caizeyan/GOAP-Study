@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class WorldState
+public struct WorldState
 {
     public string key;
     public int value;

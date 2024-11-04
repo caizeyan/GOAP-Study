@@ -14,6 +14,11 @@ public class Goal
                 this.name = name;
         }
 
+        public void AddStation(WorldState state)
+        { 
+                AddStation(state.key,state.value);
+        }
+
         public void AddStation(string key, int value)
         {
                 if (sgoals.ContainsKey(key))

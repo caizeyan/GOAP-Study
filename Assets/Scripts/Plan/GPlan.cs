@@ -92,7 +92,7 @@ public class GPlan
     private Dictionary<string, int> MergeCondition(Dictionary<string, int> curDiction, IAction action)
     {
         Dictionary<string, int> newDiction = new Dictionary<string, int>(curDiction);
-        foreach (var effect in action.afterEffect)
+        foreach (var effect in action.afterEffects)
         {
             if (newDiction.ContainsKey(effect.key))
             {
@@ -102,9 +102,8 @@ public class GPlan
             {
                 newDiction.Add(effect.key,effect.value);
             }
-            Debug.LogError("key"+effect.key);
+            Debug.Log("key："+effect.key);
         }
-
         return newDiction;
     }
 
