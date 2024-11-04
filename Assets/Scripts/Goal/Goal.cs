@@ -14,6 +14,15 @@ public class Goal
                 this.name = name;
         }
 
+        public void AddStation(StateType type)
+        {
+             AddStation(CreateHelper.State(type));
+        }
+        public void AddStation(StateType type,int value)
+        { 
+                AddStation(CreateHelper.State(type,value));
+        }
+        
         public void AddStation(WorldState state)
         { 
                 AddStation(state.key,state.value);
