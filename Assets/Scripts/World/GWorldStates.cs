@@ -8,6 +8,12 @@ public class WorldState
 {
     public string key;
     public int value;
+
+    public WorldState(string key, int value)
+    {
+        this.key = key;
+        this.value = value;
+    }
 }
 
 public class GWorldStates

@@ -6,18 +6,49 @@ using UnityEngine.UIElements;
 public abstract class IAgent: MonoBehaviour
 {
     public List<IAction> actions = new List<IAction>();
-    public Dictionary<Goal, int> goles = new Dictionary<Goal, int>();
-
-    IPlan panle;
-    public Queue<IAction> actionQueue;
-    public IAction curAction;
+    public List<Goal> goals = new List<Goal>();
+    public Stack<IAction> actionStack;
     public Goal curGoal;
+    GPlan panle = new GPlan();
+    private int curGoalIndex = 0;
+    
     private void Awake()
     {
+        curGoalIndex = 0;
         InitActions();
         InitGoals();
     }
 
     protected abstract void InitActions();
     protected abstract void InitGoals();
+
+    private void Update()
+    {
+        if (goals.Count == 0)
+        {
+            return;
+        }
+
+        //判断目标是否完成
+        if (curGoal == null)
+        {
+            curGoal = goals[curGoalIndex];
+        }
+
+        //没有就进行查找
+        if (actionStack == null || actionStack.Count == 0)
+        {
+            actionStack = panle.GetPlan(actions, curGoal.sgoals);
+        }
+
+        //对当前队列进行运行
+        if (actionStack != null && actionStack.Count > 0)
+        {
+            if (actionStack.Peek().Run() == ActionStage.Finished)
+            {
+                actionStack.Pop();
+            }
+        }
+      
+    }
 }

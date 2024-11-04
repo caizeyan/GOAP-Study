@@ -59,11 +59,6 @@ public sealed class GWorld
 
     public bool IsConditionSatisfied(WorldState condition)
     {
-        if (states.ContainsKey(condition.key))
-        {
-            return states[condition.key] >= condition.value;
-        }
-
-        return false;
+        return Helper.IsConditionSatisfied(states, condition);
     }
 }
