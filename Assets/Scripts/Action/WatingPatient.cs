@@ -6,6 +6,7 @@ public class WaitingPatient:GotoTargetAction
     {
         AddPreCondition(CreateHelper.State(StateType.PatientNum));
         AddEffectCondition(CreateHelper.State(StateType.GotoWaitingRoom));
+        AddEffectCondition(CreateHelper.State(StateType.GotoWaitingRoom));
     }
 
     protected override void Finish()

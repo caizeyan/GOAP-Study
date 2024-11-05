@@ -6,12 +6,13 @@ public class Nurse: IAgent
     {
         actions.Add(new WaitingPatient(this));
         actions.Add(new GetPatient(this));
+        actions.Add(new TreatPatient(this));
     }
 
     protected override void InitGoals()
     {
         Goal goal = new Goal("Patient");
-        goal.AddStation(StateType.HavePatient);
+        goal.AddStation(StateType.TreatPatient);
         goals.Add(goal);
     }
 }

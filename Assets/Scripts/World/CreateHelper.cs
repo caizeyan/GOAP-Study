@@ -2,8 +2,13 @@
 {
     GotoWaitingRoom,
     GotoDoor,
+    GoHome,
     PatientNum,
-    HavePatient
+    CubicleNum,
+    HavePatient,
+    TreatPatientNum,
+    TreatPatient,
+    Treated,
 }
 
 public static class CreateHelper

@@ -11,10 +11,15 @@ public abstract class IAgent: MonoBehaviour
     public Goal curGoal;
     GPlan panle = new GPlan();
     private int curGoalIndex = 0;
-    
+    public Dictionary<string, GameObject> resources;
+    public HashSet<WorldState> belifs;
+
+
     private void Awake()
     {
+        resources = new Dictionary<string, GameObject>();
         curGoalIndex = 0;
+        belifs = new HashSet<WorldState>();
         InitActions();
         InitGoals();
     }
@@ -44,6 +49,7 @@ public abstract class IAgent: MonoBehaviour
         //对当前队列进行运行
         if (actionStack != null && actionStack.Count > 0)
         {
+            Debug.Log(actionStack.Peek().actionName);
             if (actionStack.Peek().Run() == ActionStage.Finished)
             {
                 actionStack.Pop();

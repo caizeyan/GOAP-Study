@@ -18,6 +18,7 @@ public class GetPatient:GotoTargetAction
     }
 
     protected override void Finish()
-    {
+    { 
+        agent.resources.Add("Patient",targetGo);
     }
 }

@@ -9,7 +9,8 @@ public sealed class GWorld
     private static GWorld instance;
     //private GWorldStates states;
     private Dictionary<string, int> states;
-    private List<GameObject> patinets;
+    private Queue<GameObject> patinets;
+    private Queue<GameObject> cubicles;
     public static GWorld Instance
     {
         get
@@ -26,7 +27,14 @@ public sealed class GWorld
     private GWorld()
     {
         states = new Dictionary<string, int>();
-        patinets = new List<GameObject>();
+        patinets = new Queue<GameObject>();
+        cubicles = new Queue<GameObject>();
+        var cubs = GameObject.FindGameObjectsWithTag("Cubicle");
+        for (int i = 0; i < cubs.Length; i++)
+        {
+            cubicles.Enqueue(cubs[i]);
+        }
+        ModifyState(CreateHelper.State(StateType.CubicleNum,cubs.Length));
     }
 
     public Dictionary<string, int> GetStates()
@@ -36,7 +44,7 @@ public sealed class GWorld
 
     public void AddPatient(GameObject go)
     {
-        patinets.Add(go);
+        patinets.Enqueue(go);
         ModifyState(CreateHelper.State(StateType.PatientNum,1));        
     }
     
@@ -46,12 +54,31 @@ public sealed class GWorld
         {
             return null;
         }
-        var go = patinets[0];
-        patinets.RemoveAt(0);
+        var go = patinets.Peek();
+        patinets.Dequeue();
         ModifyState(CreateHelper.State(StateType.PatientNum,-1));
         return go;
     }
 
+    
+    public void AddCubicle(GameObject go)
+    {
+        cubicles.Enqueue(go);
+        ModifyState(CreateHelper.State(StateType.CubicleNum,1));        
+    }
+    
+    public GameObject GetCubicle()
+    {
+        if (cubicles.Count == 0)
+        {
+            return null;
+        }
+        var go = cubicles.Peek();
+        cubicles.Dequeue();
+        ModifyState(CreateHelper.State(StateType.CubicleNum,-1));
+        return go;
+    }
+    
     public void ModifyState(string key, int value)
     {
         if (states.ContainsKey(key))
