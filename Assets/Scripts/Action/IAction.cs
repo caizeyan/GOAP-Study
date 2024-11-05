@@ -83,18 +83,21 @@ public abstract class IAction
 
     public ActionStage Run()
     {
+        //当前刷新state后需要下一帧才执行对应方法
+        var preState = stage;
         if (stage == ActionStage.Prepare)
         {
             Prepare();
-        }else if (stage == ActionStage.Progress)
+        }
+        else if (stage == ActionStage.Progress)
         {
             Progress();
-        }else if (stage == ActionStage.Finished)
+        }
+        else if (stage == ActionStage.Finished)
         {
             Finish();
         }
-
-        return stage;
+        return preState;
     }
     
 }

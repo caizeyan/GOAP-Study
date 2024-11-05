@@ -37,7 +37,7 @@ public class GPlan
 
         if (!success)
         {
-            Debug.LogError("No Plan");
+            Debug.LogWarning("No Plan");
             return null;
         }
 
