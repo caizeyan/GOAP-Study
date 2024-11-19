@@ -1058,7 +1058,7 @@ namespace BehaviorDesigner.Runtime
         // Tick all of the behavior trees
         public void Tick()
         {
-            for (int i = 0; i < behaviorTrees.Count; ++i) {
+            for (int i = behaviorTrees.Count-1; i >= 0; i--) {
                 Tick(behaviorTrees[i]);
             }
         }
