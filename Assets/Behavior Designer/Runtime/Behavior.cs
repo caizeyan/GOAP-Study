@@ -253,6 +253,7 @@ namespace BehaviorDesigner.Runtime
                 var variables = mBehaviorSource.GetAllVariables();
                 hasInheritedVariables = variables != null && variables.Count > 0;
                 externalBehavior.BehaviorSource.Owner = ExternalBehavior;
+                //将externalBehavior.BehaviorSource序列化的值设置到BehaviorSource里面
                 externalBehavior.BehaviorSource.CheckForSerialization(forceSerialization || !hasSerialized, GetBehaviorSource(), isPlaying);
                 externalBehavior.BehaviorSource.EntryTask = mBehaviorSource.EntryTask;
                 if (hasInheritedVariables) {
