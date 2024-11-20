@@ -834,7 +834,7 @@ namespace BehaviorDesigner.Runtime
                     }
                 }
 
-                taskValues.Add(fields[i].Name, fields[i].GetValue(task));
+                taskValues.Add(fields[i].Name, value);
             }
 
             defaultValues.Add(task, taskValues);
