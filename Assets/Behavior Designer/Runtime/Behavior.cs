@@ -249,6 +249,7 @@ namespace BehaviorDesigner.Runtime
         {
             if (externalBehavior != null) {
                 var hasSerialized = mBehaviorSource.HasSerialized;
+                //读取原本的数据是为了设置共享数据
                 mBehaviorSource.CheckForSerialization(forceSerialization || !hasSerialized, null, isPlaying);
                 var variables = mBehaviorSource.GetAllVariables();
                 hasInheritedVariables = variables != null && variables.Count > 0;
